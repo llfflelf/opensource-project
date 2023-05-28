@@ -36,7 +36,7 @@ def hangman():
     while len(word_letters) > 0 and lives > 0:
         # letters used
         # ' '.join(['a', 'b', 'cd']) --> 'a b cd'
-        print('You have', lives, 'lives left and you have used these letters: ', ' '.join(used_letters))
+        print('당신은 ', lives, '목숨이 남았고 당신은 이 빈칸을 남겼습니다: ', ' '.join(used_letters))
 
         # what current word is (ie W - R D)
         word_list = [letter if letter in used_letters else '-' for letter in word]
