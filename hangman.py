@@ -1,15 +1,3 @@
-"""
-Hangman implementation by Kylie Ying
-
-YouTube Kylie Ying: https://www.youtube.com/ycubed 
-Twitch KylieYing: https://www.twitch.tv/kylieying 
-Twitter @kylieyying: https://twitter.com/kylieyying 
-Instagram @kylieyying: https://www.instagram.com/kylieyying/ 
-Website: https://www.kylieying.com
-Github: https://www.github.com/kying18 
-Programmer Beast Mode Spotify playlist: https://open.spotify.com/playlist/4Akns5EUb3gzmlXIdsJkPs?si=qGc4ubKRRYmPHAJAIrCxVQ 
-"""
-
 import random
 from words import words
 from hangman_visual import lives_visual_dict
@@ -32,10 +20,10 @@ def hangman():
 
     lives = 7
 
+    print('정답',word)
+
     # getting user input
     while len(word_letters) > 0 and lives > 0:
-        # letters used
-        # ' '.join(['a', 'b', 'cd']) --> 'a b cd'
         print('당신은 ', lives, '목숨이 남았고 당신이 선택한 알파벳: ', ' '.join(used_letters))
 
         # what current word is (ie W - R D)
