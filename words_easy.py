@@ -1,0 +1,1 @@
+words = ["abed","abet","ably","aced","ache","ally","acid","acme","acta","acts","ajar","alae","alan","alap","alee","amid","paal","paca","pact","fact","pads","pals","pass","acid","ajar","ugly","ulna","luna","ulva","life","star","moon","tie","try","true"]

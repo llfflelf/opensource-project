@@ -1,8 +1,6 @@
 import random
-from words import words
 from hangman_visual import lives_visual_dict
 import string
-
 
 def get_valid_word(words):
     word = random.choice(words)
@@ -13,12 +11,27 @@ def get_valid_word(words):
 
 
 def hangman():
+
+    difficulty = input("게임 난이도를 선택하세요 (1: 쉬움, 2: 보통, 3: 어려움): ")
+
+    if difficulty == '1':
+        from words_easy import words
+        lives = 10
+    elif difficulty == '2':
+        from words_medium import words
+        lives = 7
+    elif difficulty == '3':
+        from words_hard import words
+        lives = 5
+    else:
+        print("유효하지 않은 선택입니다. 보통 난이도로 게임을 시작합니다.")
+        from words_medium import words
+        lives = 7
+    
     word = get_valid_word(words)
     word_letters = set(word)  # letters in the word
     alphabet = set(string.ascii_uppercase)
     used_letters = set()  # what the user has guessed
-
-    lives = 7
 
     print('정답',word)
 
@@ -43,12 +56,12 @@ def hangman():
                 print('\n당신이 선택한 알파벳', user_letter, '은(는) 단어안에 존재하지 않습니다.')
 
         elif user_letter in used_letters:
-            print('\nYou have already used that letter. Guess another letter.')
+            print('\n이전에 이미 선택한 글자입니다. 다른 글자를 선택해주세요.')
 
         else:
-            print('\nThat is not a valid letter.')
+            print('\n유효하지 않은 글자입니다.')
 
-    # gets here when len(word_letters) == 0 OR when lives == 0
+
     if lives == 0:
         print(lives_visual_dict[lives])
         print('당신은 죽었습니다. 맞춰야 할 단어는', word)
