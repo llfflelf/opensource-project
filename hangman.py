@@ -142,12 +142,81 @@ def ballsAndCows():
         if play_again.upper() != "Y":
             break
 
+def print_board(board):
+    print("   " + "   ".join(chr(ord("A") + i) for i in range(15)))
+    print("  +" + "---+" * 15)
+
+    for row in range(15):
+        print(f"{row+1:2d}|", end="")
+        for col in range(15):
+            print(f" {board[row][col]} |", end="")
+        print("\n  +" + "---+" * 15)
+
+
+def check_winner(board, player):
+    # 가로 체크
+    for row in range(15):
+        for col in range(11):
+            if all(board[row][col+i] == player for i in range(5)):
+                return True
+
+    # 세로 체크
+    for row in range(11):
+        for col in range(15):
+            if all(board[row+i][col] == player for i in range(5)):
+                return True
+
+    # 대각선 (왼쪽 상단에서 오른쪽 하단)
+    for row in range(11):
+        for col in range(11):
+            if all(board[row+i][col+i] == player for i in range(5)):
+                return True
+
+    # 대각선 (오른쪽 상단에서 왼쪽 하단)
+    for row in range(11):
+        for col in range(4, 15):
+            if all(board[row+i][col-i] == player for i in range(5)):
+                return True
+
+    return False
+
+def Omog():
+    board = [[" " for _ in range(15)] for _ in range(15)]
+    current_player = "X"
+
+    while True:
+        print_board(board)
+        print(f"현재 차례: {current_player}")
+
+        move = input("위치를 입력하세요 (예: A1): ")
+        col = ord(move[0].upper()) - ord("A")
+        row = int(move[1:]) - 1
+
+        if not (0 <= row < 15 and 0 <= col < 15):
+            print("유효하지 않은 위치입니다. 다시 입력해주세요.")
+            continue
+
+        if board[row][col] != " ":
+            print("이미 선택된 위치입니다. 다시 입력해주세요.")
+            continue
+
+        board[row][col] = current_player
+
+        if check_winner(board, current_player):
+            print_board(board)
+            print(f"승리자: {current_player}")
+            break
+
+        current_player = "O" if current_player == "X" else "X"
+
+
 def main():
     while True:
         print("안녕하세요. 게임을 선택해주세요.")
         print("1. 행맨")
         print("2. 숫자야구")
-        print("3. 종료")
+        print("3. 오목")
+        print("4. 종료")
         choice = input("선택: ")
 
         if choice == "1":
@@ -155,6 +224,8 @@ def main():
         elif choice == "2":
             ballsAndCows()
         elif choice == "3":
+            Omog()
+        elif choice == "4":
             print("게임을 종료합니다.")
             break
         else:
